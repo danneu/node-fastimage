@@ -12,8 +12,12 @@ Works with image types: `gif`, `bmp`, `jpg`, `png`.
 
 ## Usage
 
+It returns a simple object: `{ type: "png", width: 2000, height: 1200 }`
+
 ~~~ javascript
-new FastImage("http://example.com/2000x1200-image.png", function(img) {
+fastimage = require "fastimage"
+
+fastimage("http://example.com/2000x1200-image.png", function(img) {
   img.type   // "png"
   img.width  // 2000
   img.height // 1200
@@ -21,16 +25,6 @@ new FastImage("http://example.com/2000x1200-image.png", function(img) {
 ~~~
 
 ## TODO
-
-* The instantiation + callback API is pretty weird. Instead it should
-  probably be something like:
-
-        fastimage = require("fastimage")
-        fastimage("http://example.com/2000x1200-image.png", function(img) {
-          img.type
-          img.width
-          img.height
-        });
 
 * I haven't been able  to test the `else` condition on the BMP parser. I have
   yet to find a BMP that doesn't satisfy the `if` code path.

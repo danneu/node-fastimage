@@ -4,7 +4,12 @@ log = console.log
 
 class FastImage
 
+  @fastimage: (uri, callback) ->
+    new FastImage(uri, callback).fetchDimensions()
+
   constructor: (@uri, @callback) ->
+
+  fetchDimensions: -> 
     @fetchPacket @uri
 
   fetchPacket: (uri) ->
@@ -77,4 +82,4 @@ class FastImage
           break
     @callback null, {@type, width, height}
 
-module.exports = FastImage
+module.exports = FastImage.fastimage
