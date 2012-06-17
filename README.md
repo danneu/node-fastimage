@@ -13,10 +13,11 @@ Works with image types: `gif`, `bmp`, `jpg`, `png`.
 ## Usage
 
 ~~~ javascript
-img = new FastImage("http://example.com/2000x1200-image.png");
-img.type   // "png"
-img.width  // 2000
-img.height // 1200
+new FastImage("http://example.com/2000x1200-image.png", function(img) {
+  img.type   // "png"
+  img.width  // 2000
+  img.height // 1200
+});
 ~~~
 
 ## References
