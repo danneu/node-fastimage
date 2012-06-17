@@ -3,14 +3,17 @@ log = console.log
 {parse} = require "url"
 
 class FastImage
+
   constructor: (@uri, @callback) ->
     @fetchPacket @uri
+
   fetchPacket: (uri) ->
     {host, path} = parse uri
     req = http.get {host, path, port: 80}, (res) =>
       res.on "data", (buffer) =>
         @parseSize buffer
         req.abort()
+
   parseSize: (buffer) ->
     @type = @parseType buffer
     switch @type
@@ -18,6 +21,7 @@ class FastImage
       when "bmp" then @parseSizeForBmp buffer
       when "png" then @parseSizeForPng buffer
       when "jpg" then @parseSizeForJpg buffer
+
   parseType: (buffer) ->
     switch buffer.slice(0, 2).toString "hex"
       when "4749" then "gif"
@@ -25,10 +29,12 @@ class FastImage
       when "8950" then "png"
       when "ffd8" then "jpg"
       else throw "Unrecognized type"
+
   parseSizeForGif: (buffer) -> 
     width  = buffer.readInt16LE 6
     height = buffer.readInt16LE 8
     @callback null, {@type, width, height}
+
   parseSizeForBmp: (buffer) ->
     buf = buffer.slice 14, 28
     if buf[0] is 40
@@ -38,10 +44,12 @@ class FastImage
     else
       @callback "TODO: Unimplemented BMP case", null
       #log buf[4..8].readUInt32BE 0
+
   parseSizeForPng: (buffer) ->
     width = buffer.readUInt32BE(16)
     height = buffer.readUInt32BE(20)
     @callback null, {@type, width, height}
+
   parseSizeForJpg: (buffer) -> 
     state = 0
     width = null
