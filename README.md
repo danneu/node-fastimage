@@ -47,6 +47,8 @@ new FastImage("http://example.com/2000x1200-image.png", function(img) {
 * Need some real error handling.
 * Better tests.
 * Local file inspection.
+* While it hasn't failed me yet, I don't think I can blindly expect the first
+  response chunk to always be long enough to give me all the necessary bytes.
 
 ## References
 
