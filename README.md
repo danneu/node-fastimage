@@ -15,12 +15,12 @@ Works with image types: `gif`, `bmp`, `jpg`, `png`.
 It returns a simple object: `{ type: "png", width: 2000, height: 1200 }`
 
 ~~~ javascript
-fastimage = require "fastimage" # Note: it's not an NPM module yet.
+fastimage = require("fastimage"); // Note: it's not an NPM module yet.
 
 fastimage("http://example.com/2000x1200-image.png", function(img) {
-  img.type   // "png"
-  img.width  // 2000
-  img.height // 1200
+  img.type,   // "png"
+  img.width,  // 2000
+  img.height, // 1200
 });
 ~~~
 
